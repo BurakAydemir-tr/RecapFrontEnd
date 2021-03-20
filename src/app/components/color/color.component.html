@@ -1,4 +1,7 @@
 <h3 class="text-center bg-success fw-bold fst-italic">Colors</h3>
-<ul *ngFor="let color of colors" class="list-group">
-    <li class="list-group-item">{{color.colorName}}</li>
+<ul class="list-group">
+    <li (click)="setCurrentColor(color)"
+    routerLink="/cars/color/{{color.colorId}}"
+    *ngFor="let color of colors" 
+    [class]="getCurrentColorClass(color)">{{color.colorName}}</li>
 </ul>

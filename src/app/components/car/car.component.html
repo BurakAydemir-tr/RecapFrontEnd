@@ -1,20 +1,32 @@
 <div *ngIf="dataLoaded==false" class="spinner-border text-danger" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
-  <table *ngIf="dataLoaded==true"  class="table-success table  text-center">
-      <thead>
-        <tr>
-          <th>Car</th>
-          <th>Brand</th>
-          <th>Color</th>
-          <th>Daily Price</th>
-        </tr>
-      </thead>
-      <tr *ngFor="let car of cars">
-        <td>{{car.carName}}</td>
-        <td>{{car.brandName}}</td>
-        <td>{{car.colorName}}</td>
-        <td>{{car.dailyPrice}}</td>
-      </tr>
-    
-    </table>
+  <span class="visually-hidden">Loading...</span>
+</div>
+<table *ngIf="dataLoaded==true" class="table-success table  text-center">
+  <thead>
+    <tr>
+      <th>CarID</th>
+      <th>Car</th>
+      <th>Brand</th>
+      <th>Color</th>
+      <th>Daily Price</th>
+      <th>Model Year</th>
+      <th>Description</th>
+      <th>Detail</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let car of cars">
+      <td>{{car.id}}</td>
+      <td>{{car.carName}}</td>
+      <td>{{car.brandId}}</td>
+      <td>{{car.colorId}}</td>
+      <td>{{car.dailyPrice}}</td>
+      <td>{{car.modelYear}}</td>
+      <td>{{car.description}}</td>
+      <td><button 
+        routerLink="/cars/cardto/{{car.id}}"
+        (click)="getCarDtos(car.id)" type="button" class="btn btn-success">Detail</button></td>
+    </tr>
+  </tbody>
+
+</table>
