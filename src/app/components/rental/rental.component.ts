@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { CarDto } from 'src/app/models/carDto';
 import { Rental } from 'src/app/models/rental';
 import { RentalService } from 'src/app/services/rental.service';
 
@@ -11,10 +12,11 @@ export class RentalComponent implements OnInit {
   rentals:Rental[]=[];
   dataLoaded=false;
 
+  @Input() carforrental:CarDto
   constructor(private rentalService:RentalService) { }
 
   ngOnInit(): void {
-    this.getRentals();
+    // this.getRentals();
   }
 
   getRentals(){

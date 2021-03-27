@@ -1,4 +1,37 @@
-<div class="row image-section">
+<h3 class="d-flex justify-content-center">CAR DETAILS</h3>
+<div class="alert alert-danger" role="alert" *ngIf="carDtos.status==false">
+  Araç şu an kiralanamaz.
+</div>
+
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <!-- <div class="carousel-inner">
+      <div *ngFor="let image of carImages let i = index" [ngClass]="getSliderClassName(i)">
+        <img [src]="getImagePath(image.imagePath)" class="d-block w-100" width="800" height="400" alt="...">
+      </div>
+    </div> -->
+    <div class="carousel-indicators">
+      <button *ngFor="let image of carImages;let i = index" type="button" data-bs-target="#carouselExampleIndicators" attr.data-bs-slide-to="{{i}}" [class]="getButtonClass(image)" aria-current="true" aria-label="Slide 1"></button>
+      
+    </div>
+    <div class="carousel-inner">
+      <div *ngFor="let image of carImages" [class]="getCurrentImageClass(image)">
+        <img src="{{path}}{{image.imagePath}}" class="d-block w-100" width="640" height="480"  alt="Image">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+
+
+
+<!-- <div class="row image-section">
     <div *ngFor="let image of carImages" class="col-md-4 img-gallery">
       <img
         [src]="getImagePath(image.imagePath)"
@@ -6,7 +39,9 @@
         [alt]="getImagePath(image.imagePath)"
       />
     </div>
-  </div>
+  </div> -->
+
+
   <ul *ngIf="carDtos" class="list-group list-group-flush">
     <li class="list-group-item">Car Name: {{ carDtos.carName }}</li>
     <li class="list-group-item">Brand Name: {{ carDtos.brandName }}</li>
@@ -15,8 +50,13 @@
     <li class="list-group-item">DailyPrice: {{ carDtos.dailyPrice }}</li>
     <li class="list-group-item">Description: {{ carDtos.description }}</li>
   </ul>
-  <div class="btn-goback">
-    <button routerLink="/cars" type="button" class="btn btn-xs btn-success">
+  <div class="button">
+    <button routerLink="/cars" type="button" class="btn btn-success" style="width: 100px; margin-right: 10px">
       Go Back
     </button>
+    <div class="d-grid gap-2 mb-2" *ngIf="carDtos.status==true">
+      <app-rental [carforrental]="carDtos"></app-rental>
+    </div>
+    
   </div>
+  

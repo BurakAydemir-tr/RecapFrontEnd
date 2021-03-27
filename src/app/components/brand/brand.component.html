@@ -1,7 +1,14 @@
-<h3 class="text-center bg-primary fw-bold fst-italic">Brands</h3>
-<ul class="list-group">
+<!-- <h3 class="text-center bg-primary fw-bold fst-italic">Brands</h3> -->
+
+
+<ul class="list-group"><h3 class="text-center bg-primary fw-bold fst-italic">Markalar</h3>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Brand Filter</label>
+        <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Brand search">
+    </div>
+    <li  [class]="getAllBrandClass()" routerLink = "/cars">Tüm Markalar</li>
     <li (click)="setCurrentBrand(brand)"
     routerLink="/cars/brand/{{brand.brandId}}" 
-    *ngFor="let brand of brands" 
+    *ngFor="let brand of brands | brandFilterPipe:filterText" 
     [class]="getCurrentBrandClass(brand)">{{brand.brandName}}</li>
 </ul>

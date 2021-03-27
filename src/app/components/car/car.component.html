@@ -1,10 +1,43 @@
 <div *ngIf="dataLoaded==false" class="spinner-border text-danger" role="status">
   <span class="visually-hidden">Loading...</span>
 </div>
+<div class="row mb-2">
+  <div class="col col-4">
+    <select  [(ngModel)]="brandId" class="form-select" aria-label="Default select example">
+      <option selected>Open this select menu</option>
+      <option *ngFor="let brand of brands" value="{{brand.brandId}}" 
+      [selected]="getSelectedBrand(brand.brandId)">{{brand.brandName}}</option>
+      
+    </select>
+  </div>
+  <div class="col col-4">
+    <select  [(ngModel)]="colorId" class="form-select" aria-label="Default select example">
+      <option selected>Open this select menu</option>
+      <option *ngFor="let color of colors" value="{{color.colorId}}"
+      [selected]="getSelectedColor(color.colorId)">{{color.colorName}}</option>
+      
+    </select>
+  </div>
+  <div class="col col-2">
+    <a routerLink="/cars/filter/{{brandId}}/{{colorId}}" class="btn btn-warning">Filtrele</a>
+    </div>
+    <div class="col col-2">
+        <a routerLink="/cars" class="btn btn-danger">Temizle</a>
+    </div>
+  
+</div>
+<div class="mb-3">
+  <label for="filterText" class="form-label">Araba ara</label>
+  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" 
+  placeholder="arama ifadesi giriniz">
+</div>
+<div *ngIf="filterText.length>2" class="alert alert-danger">
+  {{filterText}} aradınız.
+</div>
+
 <table *ngIf="dataLoaded==true" class="table-success table  text-center">
   <thead>
     <tr>
-      <th>CarID</th>
       <th>Car</th>
       <th>Brand</th>
       <th>Color</th>
@@ -15,17 +48,16 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let car of cars">
-      <td>{{car.id}}</td>
+    <tr *ngFor="let car of carDtos | carFilterPipe:filterText">
       <td>{{car.carName}}</td>
-      <td>{{car.brandId}}</td>
-      <td>{{car.colorId}}</td>
+      <td>{{car.brandName}}</td>
+      <td>{{car.colorName}}</td>
       <td>{{car.dailyPrice}}</td>
       <td>{{car.modelYear}}</td>
       <td>{{car.description}}</td>
       <td><button 
         routerLink="/cars/cardto/{{car.id}}"
-        (click)="getCarDtos(car.id)" type="button" class="btn btn-success">Detail</button></td>
+         type="button" class="btn btn-success">Detail</button></td>
     </tr>
   </tbody>
 

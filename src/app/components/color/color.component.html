@@ -1,7 +1,12 @@
-<h3 class="text-center bg-success fw-bold fst-italic">Colors</h3>
-<ul class="list-group">
+<!-- <h3 class="text-center bg-success fw-bold fst-italic">Colors</h3> -->
+<ul class="list-group"><h3 class="text-center bg-primary fw-bold fst-italic">Colors</h3>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Color Filter</label>
+        <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Color search">
+    </div>
+    <li  [class]="getAllColorClass()" routerLink = "/cars">Tüm Renkler</li>
     <li (click)="setCurrentColor(color)"
     routerLink="/cars/color/{{color.colorId}}"
-    *ngFor="let color of colors" 
+    *ngFor="let color of colors | colorFilterPipe:filterText" 
     [class]="getCurrentColorClass(color)">{{color.colorName}}</li>
 </ul>

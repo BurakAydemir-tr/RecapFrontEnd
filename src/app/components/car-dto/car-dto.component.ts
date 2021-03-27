@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CarDto } from 'src/app/models/carDto';
 import { CarImage } from 'src/app/models/carImage';
+import { Rental } from 'src/app/models/rental';
 import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
 
@@ -12,7 +13,10 @@ import { CarService } from 'src/app/services/car.service';
 })
 export class CarDtoComponent implements OnInit {
   carDtos:CarDto;
-  carImages:CarImage[];
+  carImages:CarImage[]=[];
+  rentals:Rental[];
+  currentImage : CarImage;
+  dataLoaded = false;
   path="https://localhost:44354/Images/";
 
   constructor(private carService:CarService, private carImageService:CarImageService, 
@@ -42,6 +46,30 @@ export class CarDtoComponent implements OnInit {
   getImagePath(imagePath:string){
     let newPath=this.path+imagePath;
     return newPath;
+  }
+
+  getButtonClass(image:CarImage){
+    if(image==this.carImages[0]){
+      return "active"
+    } else {
+      return ""
+    }
+  }
+
+  getCurrentImageClass(image:CarImage){
+    if(image==this.carImages[0]){
+      return "carousel-item active"
+    } else {
+      return "carousel-item"
+    }
+  }
+
+  getSliderClassName(index:number){
+    if(index == 0){
+      return "carousel-item active";
+    } else {
+      return "carousel-item";
+    }
   }
 
 }
