@@ -1,5 +1,5 @@
 <h3 class="d-flex justify-content-center">CAR DETAILS</h3>
-<div class="alert alert-danger" role="alert" *ngIf="carDtos.status==false">
+<div class="alert alert-danger" role="alert" *ngIf="!status">
   Araç şu an kiralanamaz.
 </div>
 
@@ -54,9 +54,9 @@
     <button routerLink="/cars" type="button" class="btn btn-success" style="width: 100px; margin-right: 10px">
       Go Back
     </button>
-    <div class="d-grid gap-2 mb-2" *ngIf="carDtos.status==true">
-      <app-rental [carforrental]="carDtos"></app-rental>
-    </div>
     
+    <button type="button" class="btn btn-danger" style="width: 100px; margin-right: 10px"
+    *ngIf="status" data-bs-toggle="modal" data-bs-target="#exampleModal">Kirala</button>
+    <app-rental [carforrental]="carDtos"></app-rental>
   </div>
   

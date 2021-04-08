@@ -17,6 +17,7 @@ export class CarDtoComponent implements OnInit {
   rentals:Rental[];
   currentImage : CarImage;
   dataLoaded = false;
+  status:boolean
   path="https://localhost:44354/Images/";
 
   constructor(private carService:CarService, private carImageService:CarImageService, 
@@ -34,6 +35,7 @@ export class CarDtoComponent implements OnInit {
   getCarDtos(cardId:number){
     this.carService.getCarDtos(cardId).subscribe(response=>{
       this.carDtos=response.data[0];
+      this.status=this.carDtos.status;
     })
   }
 
